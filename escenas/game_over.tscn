@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://cx4esq3eqsl3d"]
+
+[ext_resource type="Script" uid="uid://bseyquceaeda0" path="res://scripts/game_over.gd" id="1_5bjgx"]
+[ext_resource type="FontFile" uid="uid://noqj64il7vwn" path="res://Beon-Regular.ttf" id="2_1n47p"]
+[ext_resource type="FontFile" uid="uid://d1qjy7rl1ftl5" path="res://NeonSans.ttf" id="3_2mkai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d5yl"]
+size = Vector2(228, 95)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mkai"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51qs2"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="GameOver" type="Control" unique_id=395956460]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5bjgx")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1904422241]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 1629.0
+offset_bottom = 729.0
+color = Color(0, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1563365351]
+position = Vector2(536, 567)
+scale = Vector2(0.99488455, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=189924181]
+position = Vector2(-5, -3)
+shape = SubResource("RectangleShape2D_8d5yl")
+
+[node name="Label" type="Label" parent="Area2D" unique_id=1771129498]
+offset_left = -112.57588
+offset_top = -38.99997
+offset_right = 105.42412
+offset_bottom = 36.00003
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("2_1n47p")
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxFlat_2mkai")
+text = "RETRY"
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=551222669]
+position = Vector2(1072, 575)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=478645100]
+position = Vector2(14, -9)
+shape = SubResource("RectangleShape2D_8d5yl")
+
+[node name="Label2" type="Label" parent="Area2D2" unique_id=1649800147]
+offset_left = -86.0
+offset_top = -48.0
+offset_right = 112.0
+offset_bottom = 27.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_1n47p")
+theme_override_font_sizes/font_size = 68
+theme_override_styles/normal = SubResource("StyleBoxFlat_51qs2")
+text = "MENU"
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1657381041]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 261.0
+offset_right = 1117.0
+offset_bottom = 331.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_1n47p")
+theme_override_font_sizes/font_size = 70
+text = "Score 0000000"
+
+[node name="HighscoreLabel" type="Label" parent="." unique_id=2075499003]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 360.0
+offset_right = 1269.0
+offset_bottom = 432.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_1n47p")
+theme_override_font_sizes/font_size = 68
+text = "Best 0000000"
+
+[node name="Title" type="Label" parent="." unique_id=42069252]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 81.0
+offset_right = 1238.0
+offset_bottom = 245.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_2mkai")
+theme_override_font_sizes/font_size = 142
+text = "GAME OVER"
+
+[node name="GoG" type="Label" parent="." unique_id=128952910]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 479.0
+offset_top = 81.0
+offset_right = 562.0
+offset_bottom = 244.0
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_2mkai")
+theme_override_font_sizes/font_size = 142
+text = "G"
+
+[node name="GoO" type="Label" parent="." unique_id=571838526]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 908.0
+offset_top = 81.0
+offset_right = 991.0
+offset_bottom = 244.0
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_2mkai")
+theme_override_font_sizes/font_size = 142
+text = "O"
+
+[node name="Gop" type="Label" parent="." unique_id=775669560]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 1187.0
+offset_top = 81.0
+offset_right = 1270.0
+offset_bottom = 244.0
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_2mkai")
+theme_override_font_sizes/font_size = 142
+text = "!"

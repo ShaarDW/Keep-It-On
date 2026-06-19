@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c3oiiryrw1jav"]
+
+[ext_resource type="Texture2D" uid="uid://m6mjfejhe8qj" path="res://sprites/wall.png" id="1_h4bq7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r1hcx"]
+friction = 0.3
+bounce = 0.8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udqtd"]
+size = Vector2(96, 20)
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=649504575]
+light_mask = 2
+z_index = 1
+collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_r1hcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1784616788]
+position = Vector2(7.6293945e-06, 2.9802322e-08)
+scale = Vector2(3.03125, 0.65625)
+texture = ExtResource("1_h4bq7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=891744264]
+shape = SubResource("RectangleShape2D_udqtd")

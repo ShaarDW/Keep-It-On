@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://iu0v3g5iwldq"]
+
+[ext_resource type="Script" uid="uid://7gw4b30cpult" path="res://scripts/player.gd" id="1_kkt6c"]
+[ext_resource type="Texture2D" uid="uid://dtqbmu23o16sa" path="res://sprites/player.png" id="2_j7xnp"]
+[ext_resource type="Script" uid="uid://bc1dhsu36gni4" path="res://scripts/shockwave.gd" id="3_j7xnp"]
+[ext_resource type="Shader" uid="uid://c23knmg3a43yu" path="res://shaders/player.gdshader" id="4_6nxto"]
+[ext_resource type="Texture2D" uid="uid://dsvt61hcvmqdo" path="res://sprites/powerup_indicator.png" id="5_t3yu4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqap4"]
+radius = 21.0
+
+[sub_resource type="Gradient" id="Gradient_kkt6c"]
+colors = PackedColorArray(1, 1, 1, 1, 0.12156863, 0.12156863, 0.12156863, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7xnp"]
+gradient = SubResource("Gradient_kkt6c")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4hsq"]
+shader = ExtResource("4_6nxto")
+shader_parameter/progress = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6nxto"]
+radius = 23.852264
+
+[node name="Player" type="CharacterBody2D" unique_id=1160170576]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_kkt6c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1995048908]
+scale = Vector2(1.0035073, 1.0109236)
+shape = SubResource("CircleShape2D_pqap4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=185217499]
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_j7xnp")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=134992185]
+z_index = -1
+scale = Vector2(20, 20)
+texture = SubResource("GradientTexture2D_j7xnp")
+texture_scale = 3.75
+
+[node name="ShockWave" type="Node2D" parent="." unique_id=1862994226]
+script = ExtResource("3_j7xnp")
+
+[node name="PointLight2D" type="PointLight2D" parent="ShockWave" unique_id=93708082]
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_j7xnp")
+
+[node name="PowerupIndicator" type="Sprite2D" parent="." unique_id=1597283478]
+visible = false
+material = SubResource("ShaderMaterial_r4hsq")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_t3yu4")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1201313974]
+z_index = 2
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1296807180]
+scale = Vector2(1.005, 1.005)
+shape = SubResource("CircleShape2D_6nxto")

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dx3lshytheq6e"]
+
+[ext_resource type="Script" uid="uid://bmwwx01000gew" path="res://scripts/enemy.gd" id="1_vs78y"]
+[ext_resource type="Texture2D" uid="uid://bqvrjwkokyn1g" path="res://sprites/enemy2.png" id="2_ocnky"]
+[ext_resource type="Texture2D" uid="uid://hiby7qdj3n5i" path="res://sprites/enemy.png" id="2_xmj2q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vs78y"]
+friction = 0.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vs78y"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = 179.99998
+angular_velocity_max = 359.99997
+gravity = Vector3(0, 98, 0)
+scale_min = 0.099999994
+scale_max = 0.29999998
+
+[node name="Enemy" type="RigidBody2D" unique_id=883842336]
+collision_layer = 4
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_vs78y")
+gravity_scale = 0.0
+continuous_cd = 2
+script = ExtResource("1_vs78y")
+
+[node name="Visual" type="Node2D" parent="." unique_id=1371665304]
+
+[node name="Sprite2D3" type="Sprite2D" parent="Visual" unique_id=259022581]
+modulate = Color(1, 1, 1, 0.15686275)
+visibility_layer = 2
+rotation = 1.0471976
+texture = ExtResource("2_ocnky")
+offset = Vector2(0, -8)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Visual" unique_id=1422069671]
+modulate = Color(1, 1, 1, 0.37254903)
+visibility_layer = 2
+rotation = 0.5260707
+texture = ExtResource("2_ocnky")
+offset = Vector2(0, -8)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual" unique_id=1930529615]
+visibility_layer = 2
+texture = ExtResource("2_ocnky")
+offset = Vector2(0, -8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2009633538]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, -8)
+polygon = PackedVector2Array(0.42, -27.46, -28, 29, 29, 29)
+
+[node name="DeathParticles" type="GPUParticles2D" parent="." unique_id=559007514]
+emitting = false
+texture = ExtResource("2_xmj2q")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_vs78y")

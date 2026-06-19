@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://d4ktt2fvffonc"]
+
+[ext_resource type="PackedScene" uid="uid://iu0v3g5iwldq" path="res://escenas/player.tscn" id="1_d7u15"]
+[ext_resource type="Script" uid="uid://dt8pdc8ieexd1" path="res://scripts/main.gd" id="1_jumxm"]
+[ext_resource type="PackedScene" uid="uid://d4jvjmeukokso" path="res://escenas/collectable.tscn" id="2_26pgj"]
+[ext_resource type="PackedScene" uid="uid://dx3lshytheq6e" path="res://escenas/enemy.tscn" id="3_dkga6"]
+[ext_resource type="PackedScene" uid="uid://c3oiiryrw1jav" path="res://escenas/wall.tscn" id="4_26pgj"]
+[ext_resource type="Shader" uid="uid://bufl1nahe10hv" path="res://shaders/main.gdshader" id="4_a8p2b"]
+[ext_resource type="PackedScene" uid="uid://drcf7gjhwa4td" path="res://escenas/EnemyChaser.tscn" id="4_o8odp"]
+[ext_resource type="PackedScene" uid="uid://csn65i20jukwr" path="res://escenas/power_up.tscn" id="5_68mvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8p2b"]
+shader = ExtResource("4_a8p2b")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_68mvh"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_68mvh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lyxkq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Environment" id="Environment_dkga6"]
+background_mode = 3
+
+[node name="Main" type="Node2D" unique_id=462539869]
+light_mask = 2
+script = ExtResource("1_jumxm")
+collectible_scene = ExtResource("2_26pgj")
+enemy_scene = ExtResource("3_dkga6")
+chaser_scene = ExtResource("4_o8odp")
+powerup_scene = ExtResource("5_68mvh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=274102372]
+layer = 10
+
+[node name="InvertRect" type="ColorRect" parent="CanvasLayer" unique_id=1274786489]
+visible = false
+material = SubResource("ShaderMaterial_a8p2b")
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 1652.0
+offset_bottom = 762.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=29080945]
+position = Vector2(821.00006, 355.00006)
+scale = Vector2(8.08, 3.61)
+copy_mode = 2
+
+[node name="DarkOverlay" type="CanvasModulate" parent="." unique_id=2047795016]
+material = SubResource("CanvasItemMaterial_68mvh")
+color = Color(0, 0, 0, 1)
+
+[node name="DarkCanvasLayer" type="CanvasLayer" parent="." unique_id=620068563]
+layer = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=59612206]
+position = Vector2(806, 360)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1751182765]
+z_index = -10
+offset_right = 1619.0
+offset_bottom = 719.0
+color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollectibleSpawner" type="Node2D" parent="." unique_id=1361629499]
+
+[node name="Trail" type="Line2D" parent="." unique_id=1302597017]
+width = 40.0
+width_curve = SubResource("Curve_68mvh")
+gradient = SubResource("Gradient_lyxkq")
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Player" parent="." unique_id=1723820279 instance=ExtResource("1_d7u15")]
+position = Vector2(1046, 235)
+
+[node name="Walls" type="Node2D" parent="." unique_id=784425928]
+
+[node name="WallTop" parent="Walls" unique_id=649504575 instance=ExtResource("4_26pgj")]
+position = Vector2(811.48, 30.905)
+scale = Vector2(16.85, 3.563)
+
+[node name="WallLeft" parent="Walls" unique_id=330055764 instance=ExtResource("4_26pgj")]
+position = Vector2(0, 360.58)
+rotation = 1.5707964
+scale = Vector2(7.57, 1.7)
+
+[node name="WallBottom" parent="Walls" unique_id=970887202 instance=ExtResource("4_26pgj")]
+position = Vector2(805.65, 717)
+scale = Vector2(16.976, 1.382)
+
+[node name="WallRight" parent="Walls" unique_id=1968239612 instance=ExtResource("4_26pgj")]
+position = Vector2(1620, 358.005)
+rotation = 1.5707964
+scale = Vector2(7.455, 1.7)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926260528]
+environment = SubResource("Environment_dkga6")
