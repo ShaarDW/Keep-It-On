@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://bc1dhsu36gni4" path="res://scripts/shockwave.gd" id="3_j7xnp"]
 [ext_resource type="Shader" uid="uid://c23knmg3a43yu" path="res://shaders/player.gdshader" id="4_6nxto"]
 [ext_resource type="Texture2D" uid="uid://dsvt61hcvmqdo" path="res://sprites/powerup_indicator.png" id="5_t3yu4"]
+[ext_resource type="AudioStream" uid="uid://bi1effpact6ya" path="res://audio/choquepierde.mp3" id="6_t3yu4"]
+[ext_resource type="AudioStream" uid="uid://cshfhgkvmngxn" path="res://audio/choquegana3.mp3" id="7_r4hsq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pqap4"]
 radius = 21.0
@@ -67,3 +69,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1296807180]
 scale = Vector2(1.005, 1.005)
 shape = SubResource("CircleShape2D_6nxto")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=458296152]
+stream = ExtResource("6_t3yu4")
+
+[node name="AudioKill" type="AudioStreamPlayer" parent="." unique_id=1722718522]
+stream = ExtResource("7_r4hsq")

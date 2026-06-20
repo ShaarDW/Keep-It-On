@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5ry38llcanwv"
+path="res://.godot/imported/gameplay power up.mp3-668fe4ddc7f9ac65b11b5c19e329bc5f.mp3str"
+
+[deps]
+
+source_file="res://audio/gameplay power up.mp3"
+dest_files=["res://.godot/imported/gameplay power up.mp3-668fe4ddc7f9ac65b11b5c19e329bc5f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -9,6 +9,9 @@ extends Node2D
 @export var powerup_scene: PackedScene
 @onready var camera = $Camera2D
 @onready var dark_overlay = $DarkOverlay
+@onready var music = $Music
+@onready var music_powerup = $MusicPowerup
+
 var label_score_powerup: Label
 
 var collectible_timer := 0.0
@@ -59,6 +62,13 @@ func _ready():
 	start_wave(0)
 
 
+func start_powerup_music():
+	music.stream_paused = true
+	music_powerup.play()
+
+func stop_powerup_music():
+	music_powerup.stop()
+	music.stream_paused = false  # retoma donde quedó
 func start_wave(wave_index: int):
 	if wave_index >= waves.size():
 		wave_index = waves.size() - 1

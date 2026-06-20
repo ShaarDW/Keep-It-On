@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var light = $PointLight2D
 @onready var sprite = $Sprite2D
+@onready var audio = $AudioStreamPlayer
 var spawn_pos: Vector2
 var move_radius := 40.0
 var velocity := Vector2.ZERO
@@ -10,6 +11,7 @@ var move_change_timer := 0.0
 var blink_speed := 0.5
 var blink_timer := 0.0
 var is_lit := true
+var collected := false  # ← evita doble colisión
 
 func _ready():
 	add_to_group("collectibles")
@@ -22,6 +24,9 @@ func _init_position():
 	pick_new_target()
 
 func _process(delta):
+	if collected:
+		return  # ← deja de moverse cuando fue agarrado
+	
 	move_change_timer += delta
 	if move_change_timer >= 2.0:
 		move_change_timer = 0.0
@@ -33,7 +38,7 @@ func _process(delta):
 	
 	blink_timer += delta * blink_speed
 	
-	var t = (sin(blink_timer) + 1.0) / 2.0  # entre 0 y 1
+	var t = (sin(blink_timer) + 1.0) / 2.0
 	light.energy = lerp(0.0, 4.0, t)
 	sprite.modulate = Color(lerp(0.2, 1.0, t), lerp(0.2, 1.0, t), lerp(0.2, 1.0, t), 1.0)
 
@@ -43,9 +48,21 @@ func pick_new_target():
 	target_offset = Vector2(cos(angle), sin(angle)) * dist
 
 func _on_body_entered(body):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not collected:
+		collected = true  # ← marca como recogido
+		
 		body.recharge()
+		
 		var main = get_tree().get_first_node_in_group("main")
 		if main:
 			main.add_score(10)
+		
+		# Ocultar visualmente de inmediato
+		sprite.visible = false
+		light.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)
+		
+		# Reproducir sonido y después destruir
+		audio.play()
+		await audio.finished
 		queue_free()

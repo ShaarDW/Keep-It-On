@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c16wmmvlhafv4" path="res://scripts/power_up.gd" id="1_4jv4m"]
 [ext_resource type="Texture2D" uid="uid://bi1nd5fy76kaa" path="res://sprites/power_up.png" id="2_4jv4m"]
+[ext_resource type="AudioStream" uid="uid://g7eqmlmikoxv" path="res://audio/power up 2.mp3" id="3_4lb1b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4jv4m"]
 atlas = ExtResource("2_4jv4m")
@@ -167,3 +168,6 @@ speed_scale = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=728830524]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_4jv4m")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1995247735]
+stream = ExtResource("3_4lb1b")

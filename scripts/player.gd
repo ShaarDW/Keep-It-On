@@ -3,8 +3,8 @@ extends CharacterBody2D
 var speed := 300.0
 var max_speed := 700.0
 var dim_timer := 0.0
-var dim_duration := 15.0  # segundos hasta apagarse completamente
-var max_light_energy := 25.0  # cambiá este valor a gusto
+var dim_duration := 15.0
+var max_light_energy := 25.0
 var is_dead := false
 var damage_cooldown := false
 var powerup_active := false
@@ -13,13 +13,15 @@ var powerup_active := false
 @onready var shockwave = $ShockWave
 @onready var powerup_indicator = $PowerupIndicator
 @onready var hitbox = $HitBox
+@onready var audio = $AudioStreamPlayer
+@onready var audio_kill = $AudioKill
 var trail_points := []
 var max_trail_points := 15
 var trail_fade_speed := 3.0
 var powerup_timer := 0.0
 var powerup_duration := 8.0
 var shadow_timer := 0.0
-var shadow_interval := 0.10  # cada cuánto crea una sombra
+var shadow_interval := 0.10
 signal died
 
 func _ready():
@@ -40,8 +42,12 @@ func _on_hitbox_body_entered(body):
 			if main:
 				main.add_score(body.score_value)
 			
+			audio_kill.pitch_scale = randf_range(0.9, 1.1)
+			audio_kill.play()
 			body.queue_free()
 		else:
+			audio.pitch_scale = randf_range(0.9, 1.1)
+			audio.play()
 			take_damage()
 			body.queue_free()
 
@@ -56,7 +62,6 @@ func _physics_process(delta):
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		# Rebote al chocar con pared
 		velocity = velocity.bounce(collision.get_normal()) * 1
 	
 	clamp_to_screen()
@@ -74,12 +79,11 @@ func _physics_process(delta):
 		$Sprite2D.rotation += 30.0 * delta
 	else:
 		$Sprite2D.rotation = 0.0
-		# Sombras
+
 	shadow_timer += delta
 	if shadow_timer >= shadow_interval:
 		shadow_timer = 0.0
 		spawn_shadow()
-
 
 func spawn_shadow():
 	var shadow = Sprite2D.new()
@@ -138,11 +142,11 @@ func death_sequence():
 	get_tree().paused = false
 	set_process(true)
 	set_physics_process(false)
-	velocity = Vector2.ZERO  
+	velocity = Vector2.ZERO
+	audio.stop()       # ← agregado
 	
 	var tween = create_tween()
 	
-	# Parpadeo 6 veces siempre
 	for i in range(6):
 		tween.tween_callback(func(): modulate = Color(0, 0, 0, 1))
 		tween.tween_callback(func(): light.energy = 0.0)
@@ -155,6 +159,7 @@ func death_sequence():
 		print("emitiendo died")
 		emit_signal("died")
 	)
+
 func trigger_shockwave():
 	var tween = create_tween()
 	tween.tween_property(light, "energy", max_light_energy * 1, 0.2)
@@ -176,7 +181,6 @@ func take_damage():
 		lose_life()
 		return
 	
-	# Parpadeo de daño
 	var tween = create_tween()
 	for i in range(2):
 		tween.tween_callback(func():
@@ -190,7 +194,6 @@ func take_damage():
 		)
 		tween.tween_interval(0.1)
 	
-	# Cooldown antes de poder recibir daño de nuevo
 	tween.tween_callback(func(): damage_cooldown = false)
 
 func clamp_to_screen():
@@ -203,29 +206,33 @@ func clamp_to_screen():
 func activate_powerup():
 	if powerup_active:
 		return
+	var main = get_tree().get_first_node_in_group("main")
+	if main:
+		main.start_powerup_music()
 	powerup_active = true
 	powerup_timer = 0.0
 	powerup_indicator.visible = true
-	trail_points.clear()  # limpia la estela
+	trail_points.clear()
 	trail.clear_points()
 	$Sprite2D.texture = load("res://sprites/player_spiky.png")
-	modulate = Color(1, 1, 1, 1) 
+	modulate = Color(1, 1, 1, 1)
 	light.enabled = false
-	# Eliminamos todos los collectibles
 	for c in get_tree().get_nodes_in_group("collectibles"):
 		c.queue_free()
-	
 	get_tree().get_first_node_in_group("main").toggle_invert(true)
 	await get_tree().create_timer(8.0).timeout
 	deactivate_powerup()
 
 func deactivate_powerup():
+	var main = get_tree().get_first_node_in_group("main")
+	if main:
+		main.stop_powerup_music()
 	powerup_active = false
 	powerup_indicator.visible = false
-	trail_points.clear()  
+	trail_points.clear()
 	trail.clear_points()
 	$Sprite2D.texture = load("res://sprites/player.png")
 	light.enabled = true
 	light.energy = max_light_energy
-	dim_timer = 0.0 
+	dim_timer = 0.0
 	get_tree().get_first_node_in_group("main").toggle_invert(false)

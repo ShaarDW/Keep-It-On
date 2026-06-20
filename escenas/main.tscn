@@ -8,6 +8,8 @@
 [ext_resource type="Shader" uid="uid://bufl1nahe10hv" path="res://shaders/main.gdshader" id="4_a8p2b"]
 [ext_resource type="PackedScene" uid="uid://drcf7gjhwa4td" path="res://escenas/EnemyChaser.tscn" id="4_o8odp"]
 [ext_resource type="PackedScene" uid="uid://csn65i20jukwr" path="res://escenas/power_up.tscn" id="5_68mvh"]
+[ext_resource type="AudioStream" uid="uid://og76pvedgefl" path="res://audio/gameplay_V2.mp3" id="9_dg7ii"]
+[ext_resource type="AudioStream" uid="uid://bc2gsvr6yvgn7" path="res://audio/gameplay_power_up_V1.mp3" id="9_lyxkq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8p2b"]
 shader = ExtResource("4_a8p2b")
@@ -102,3 +104,10 @@ scale = Vector2(7.455, 1.7)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926260528]
 environment = SubResource("Environment_dkga6")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1675465884]
+stream = ExtResource("9_dg7ii")
+autoplay = true
+
+[node name="MusicPowerup" type="AudioStreamPlayer" parent="." unique_id=1263281649]
+stream = ExtResource("9_lyxkq")
