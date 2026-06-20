@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://53wo3l6t8opa"]
+
+[ext_resource type="Script" uid="uid://brdb0sc7cajct" path="res://scripts/pause_screen.gd" id="1_5bjcx"]
+[ext_resource type="FontFile" uid="uid://d1qjy7rl1ftl5" path="res://NeonSans.ttf" id="2_j7a40"]
+
+[node name="pause screen" type="Control" unique_id=351000288]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5bjcx")
+
+[node name="screen" type="Control" parent="." unique_id=90681436]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.006
+offset_bottom = -0.32000732
+
+[node name="ColorRect" type="ColorRect" parent="screen" unique_id=787263941]
+layout_mode = 0
+offset_right = 1619.0
+offset_bottom = 721.0
+color = Color(0, 0, 0, 1)
+
+[node name="pause" type="Control" parent="screen" unique_id=1559139275]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="pause label" type="Label" parent="screen/pause" unique_id=667073691]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0020001
+anchor_bottom = 1.001
+offset_left = 4.0
+offset_top = 84.0
+offset_right = 1581.92
+offset_bottom = 235.96002
+theme_override_fonts/font = ExtResource("2_j7a40")
+theme_override_font_sizes/font_size = 168
+text = "PAUSE"
+horizontal_alignment = 1

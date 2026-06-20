@@ -52,7 +52,7 @@ position = Vector2(536, 567)
 scale = Vector2(0.99488455, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=189924181]
-position = Vector2(-5, -3)
+position = Vector2(-5, -1)
 shape = SubResource("RectangleShape2D_8d5yl")
 
 [node name="Label" type="Label" parent="Area2D" unique_id=1771129498]

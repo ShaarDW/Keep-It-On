@@ -45,6 +45,7 @@ var next_enemy_spawn := 0.0
 var enemy_spawn_interval := 0.0
 
 func _ready():
+	get_tree().paused= false
 	add_to_group("main")
 	await get_tree().process_frame
 	player.died.connect(_on_player_died)
@@ -304,3 +305,12 @@ func expand_invert_wave():
 	tween.tween_method(func(r: float):
 		material.set_shader_parameter("radius", r)
 	, 0.0, 3, 1.2)
+
+func _on_texture_button_button_down() -> void:
+	get_tree().paused = true
+
+func _on_pause_timer_timeout() -> void:
+	get_tree().paused = false
+
+func _on_menu_button_button_down() -> void:
+	get_tree().change_scene_to_file("res://escenas/main_menu.tscn")
