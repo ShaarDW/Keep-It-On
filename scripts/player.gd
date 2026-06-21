@@ -15,6 +15,7 @@ var powerup_active := false
 @onready var hitbox = $HitBox
 @onready var audio = $AudioStreamPlayer
 @onready var audio_kill = $AudioKill
+@onready var audio_died = $AudioDied
 var trail_points := []
 var max_trail_points := 15
 var trail_fade_speed := 3.0
@@ -137,13 +138,16 @@ func lose_life():
 	is_dead = true
 	get_tree().paused = false
 	death_sequence()
-
+	audio.stop()       # ← agregado
 func death_sequence():
+
 	get_tree().paused = false
 	set_process(true)
 	set_physics_process(false)
 	velocity = Vector2.ZERO
-	audio.stop()       # ← agregado
+
+	audio_died.play()
+
 	
 	var tween = create_tween()
 	

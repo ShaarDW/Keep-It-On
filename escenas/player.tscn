@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dsvt61hcvmqdo" path="res://sprites/powerup_indicator.png" id="5_t3yu4"]
 [ext_resource type="AudioStream" uid="uid://bi1effpact6ya" path="res://audio/choquepierde.mp3" id="6_t3yu4"]
 [ext_resource type="AudioStream" uid="uid://cshfhgkvmngxn" path="res://audio/choquegana3.mp3" id="7_r4hsq"]
+[ext_resource type="AudioStream" uid="uid://1xv70nwlffuw" path="res://audio/gameover3.mp3" id="8_sacnx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pqap4"]
 radius = 21.0
@@ -75,3 +76,7 @@ stream = ExtResource("6_t3yu4")
 
 [node name="AudioKill" type="AudioStreamPlayer" parent="." unique_id=1722718522]
 stream = ExtResource("7_r4hsq")
+
+[node name="AudioDied" type="AudioStreamPlayer" parent="." unique_id=471565653]
+stream = ExtResource("8_sacnx")
+pitch_scale = 1.48

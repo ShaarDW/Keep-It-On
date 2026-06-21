@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://ddqsgehln6jku" path="res://NeoNeon-Light.otf" id="2_8cfpu"]
 [ext_resource type="FontFile" uid="uid://noqj64il7vwn" path="res://Beon-Regular.ttf" id="3_w6fns"]
 [ext_resource type="Texture2D" uid="uid://dupwulfqidap3" path="res://asds.webp" id="4_8cfpu"]
+[ext_resource type="AudioStream" uid="uid://dhe7kvbtuy68i" path="res://audio/menu.mp3" id="5_w6fns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ter2f"]
 size = Vector2(282.5, 113)
@@ -104,3 +105,8 @@ environment = SubResource("Environment_vhgtv")
 position = Vector2(1042, 218)
 scale = Vector2(0.085, 0.085)
 texture = ExtResource("4_8cfpu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1664731191]
+stream = ExtResource("5_w6fns")
+pitch_scale = 1.19
+autoplay = true

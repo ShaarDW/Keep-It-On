@@ -111,4 +111,5 @@ autoplay = true
 
 [node name="MusicPowerup" type="AudioStreamPlayer" parent="." unique_id=1263281649]
 stream = ExtResource("10_dg7ii")
+volume_db = -4.86
 pitch_scale = 0.89

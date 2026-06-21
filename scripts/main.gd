@@ -12,6 +12,7 @@ extends Node2D
 @onready var music = $Music
 @onready var music_powerup = $MusicPowerup
 
+
 var label_score_powerup: Label
 
 var collectible_timer := 0.0
@@ -248,6 +249,9 @@ func get_random_position() -> Vector2:
 	)
 
 func _on_player_died():
+	print("player died - frenando musica")
+	music.stop()
+	print("music playing: ", music.playing)  # tiene que imprimir false
 	save_highscore()
 	await get_tree().create_timer(1.5).timeout
 	$CanvasLayer.visible = false
@@ -259,6 +263,7 @@ func _on_player_died():
 	var game_over = load("res://escenas/game_over.tscn").instantiate()
 	get_tree().root.add_child(game_over)
 	game_over.setup(score, load_highscore())
+
 
 func spawn_powerup():
 	if not powerup_scene:
