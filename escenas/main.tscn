@@ -65,6 +65,7 @@ powerup_scene = ExtResource("5_68mvh")
 layer = 10
 
 [node name="InvertRect" type="ColorRect" parent="CanvasLayer" unique_id=1274786489]
+visible = false
 material = SubResource("ShaderMaterial_a8p2b")
 offset_left = -26.0
 offset_top = -23.0
@@ -219,7 +220,7 @@ one_shot = true
 script = ExtResource("15_r01y2")
 
 [node name="Player" parent="." unique_id=1723820279 instance=ExtResource("1_d7u15")]
-position = Vector2(1070, 229)
+position = Vector2(1046, 235)
 
 [node name="Walls" type="Node2D" parent="." unique_id=784425928]
 
