@@ -116,7 +116,7 @@ script = ExtResource("8_acisx")
 visible = false
 
 [node name="resume layout" type="Control" parent="DarkCanvasLayer/pause screen" unique_id=1556225253]
-process_mode = 4
+process_mode = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
