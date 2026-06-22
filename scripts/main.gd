@@ -24,18 +24,18 @@ var score := 0
 var score_timer := 0.0
 var label_score_shadow: Label
 var label_score: Label
-var powerup_timer := -10.0
+var powerup_timer := -40.0
 var powerup_interval := 30.0  # aparece cada 15 segundos
 var waves := [
-	[20, 0],
+	[15, 0],
 	[5, 0],    # oleada 0: tutorial
 	[20, 60],
 	[5, 0],   # oleada 1
 	[20, 100],
 	[5, 0],   # oleada 2
-	[20, 140],
+	[15, 140],
 	[5, 0],   # oleada 3
-	[20, 180],
+	[15, 180],
 	[10, 0],   # oleada 4
 	[15, 220],
 	[10, 0],   # oleada 5
@@ -49,19 +49,18 @@ var next_enemy_spawn := 0.0
 var enemy_spawn_interval := 0.0
 
 func _ready():
+	Transition.fade_in()
 	add_to_group("main")
 	await get_tree().process_frame
 	player.died.connect(_on_player_died)
 	setup_score_label()
-	# Inicializamos el pool de enemigos
+	start_wave(0)
 	enemy_types_pool = [
 		{"scene": enemy_scene, "cost": 10, "type": "small"},
 		{"scene": enemy_scene, "cost": 5,  "type": "medium"},
 		{"scene": enemy_scene, "cost": 10, "type": "large"},
 		{"scene": chaser_scene, "cost": 10, "type": "chaser"},
 	]
-	start_wave(0)
-
 
 func start_powerup_music():
 	music.stream_paused = true
@@ -70,6 +69,7 @@ func start_powerup_music():
 func stop_powerup_music():
 	music_powerup.stop()
 	music.stream_paused = false  # retoma donde quedó
+
 func start_wave(wave_index: int):
 	if wave_index >= waves.size():
 		wave_index = waves.size() - 1
@@ -253,16 +253,11 @@ func _on_player_died():
 	music.stop()
 	print("music playing: ", music.playing)  # tiene que imprimir false
 	save_highscore()
+	GameData.final_score = score
+	GameData.highscore = load_highscore()
 	await get_tree().create_timer(1.5).timeout
-	$CanvasLayer.visible = false
-	label_score.visible = false
-	label_score_shadow.visible = false
-	$Walls.visible = false
-	dark_overlay.visible = false  # apagamos la oscuridad
-	get_tree().paused = true
-	var game_over = load("res://escenas/game_over.tscn").instantiate()
-	get_tree().root.add_child(game_over)
-	game_over.setup(score, load_highscore())
+	get_tree().paused = false
+	Transition.fade_to("res://escenas/game_over.tscn")
 
 
 func spawn_powerup():

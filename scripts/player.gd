@@ -8,7 +8,8 @@ var max_light_energy := 25.0
 var is_dead := false
 var damage_cooldown := false
 var powerup_active := false
-@onready var trail = get_tree().get_root().get_node("Main/Trail")
+var clamp_enabled := true
+var trail: Line2D
 @onready var light = $PointLight2D
 @onready var shockwave = $ShockWave
 @onready var powerup_indicator = $PowerupIndicator
@@ -28,7 +29,9 @@ signal died
 func _ready():
 	add_to_group("player")
 	light.energy = max_light_energy
-	hitbox.body_entered.connect(_on_hitbox_body_entered)
+	trail = get_parent().get_node_or_null("Trail")
+	$HitBox.body_entered.connect(_on_hitbox_body_entered)
+
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("enemies"):
@@ -92,12 +95,12 @@ func spawn_shadow():
 	shadow.global_position = global_position
 	shadow.rotation = $Sprite2D.global_rotation
 	shadow.scale = $Sprite2D.scale
+	shadow.z_index = 2  # encima del ColorRect pero debajo del Player
+	shadow.z_as_relative = false
 	
 	var t = clamp(1.0 - (dim_timer / dim_duration), 0.1, 1.0)
 	shadow.modulate = Color(t, t, t, 0.4)
-	
-	get_tree().get_root().get_node("Main").add_child(shadow)
-	
+	get_parent().add_child(shadow)
 	var tween = shadow.create_tween()
 	tween.tween_property(shadow, "modulate:a", 0.0, 0.4)
 	tween.tween_callback(func(): shadow.queue_free())
@@ -200,7 +203,11 @@ func take_damage():
 	
 	tween.tween_callback(func(): damage_cooldown = false)
 
+
+
 func clamp_to_screen():
+	if not clamp_enabled:
+		return
 	var screen = get_viewport_rect().size
 	var pos = global_position
 	pos.x = clamp(pos.x, 20, screen.x - 20)

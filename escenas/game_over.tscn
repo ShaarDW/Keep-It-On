@@ -2,110 +2,83 @@
 
 [ext_resource type="Script" uid="uid://bseyquceaeda0" path="res://scripts/game_over.gd" id="1_5bjgx"]
 [ext_resource type="FontFile" uid="uid://noqj64il7vwn" path="res://Beon-Regular.ttf" id="2_1n47p"]
+[ext_resource type="PackedScene" uid="uid://iu0v3g5iwldq" path="res://escenas/player.tscn" id="3_1n47p"]
 [ext_resource type="FontFile" uid="uid://d1qjy7rl1ftl5" path="res://NeonSans.ttf" id="3_2mkai"]
+[ext_resource type="Texture2D" uid="uid://pjhhyud76x8" path="res://sprites/image (1).png" id="4_id3ag"]
+[ext_resource type="PackedScene" uid="uid://c3oiiryrw1jav" path="res://escenas/wall.tscn" id="5_id3ag"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d5yl"]
-size = Vector2(228, 95)
+[sub_resource type="Curve" id="Curve_c71ct"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mkai"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+[sub_resource type="Gradient" id="Gradient_tv166"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51qs2"]
-bg_color = Color(1, 1, 1, 0)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_susww"]
+size = Vector2(148, 384.08502)
 
-[node name="GameOver" type="Control" unique_id=395956460]
+[sub_resource type="Environment" id="Environment_1n47p"]
+background_mode = 3
+
+[node name="GameOver" type="Node2D" unique_id=10017913]
 process_mode = 3
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_5bjgx")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1904422241]
-layout_mode = 0
 offset_left = -5.0
 offset_top = -5.0
 offset_right = 1629.0
 offset_bottom = 729.0
 color = Color(0, 0, 0, 1)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1563365351]
-position = Vector2(536, 567)
-scale = Vector2(0.99488455, 1)
+[node name="Trail" type="Line2D" parent="." unique_id=1193139447]
+width = 40.0
+width_curve = SubResource("Curve_c71ct")
+gradient = SubResource("Gradient_tv166")
+begin_cap_mode = 2
+end_cap_mode = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=189924181]
-position = Vector2(-5, -3)
-shape = SubResource("RectangleShape2D_8d5yl")
+[node name="Player" parent="." unique_id=1160170576 instance=ExtResource("3_1n47p")]
+position = Vector2(637, 613)
 
-[node name="Label" type="Label" parent="Area2D" unique_id=1771129498]
-offset_left = -112.57588
-offset_top = -38.99997
-offset_right = 105.42412
-offset_bottom = 36.00003
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 7
+[node name="MenuLabel" type="Label" parent="." unique_id=1024296483]
+offset_left = 1424.0
+offset_top = 192.0
+offset_right = 1655.0
+offset_bottom = 272.0
+rotation = 0.4988308
 theme_override_fonts/font = ExtResource("2_1n47p")
-theme_override_font_sizes/font_size = 68
-theme_override_styles/normal = SubResource("StyleBoxFlat_2mkai")
-text = "RETRY"
-metadata/_edit_use_anchors_ = true
-
-[node name="Area2D2" type="Area2D" parent="." unique_id=551222669]
-position = Vector2(1072, 575)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=478645100]
-position = Vector2(14, -9)
-shape = SubResource("RectangleShape2D_8d5yl")
-
-[node name="Label2" type="Label" parent="Area2D2" unique_id=1649800147]
-offset_left = -86.0
-offset_top = -48.0
-offset_right = 112.0
-offset_bottom = 27.0
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("2_1n47p")
-theme_override_font_sizes/font_size = 68
-theme_override_styles/normal = SubResource("StyleBoxFlat_51qs2")
+theme_override_font_sizes/font_size = 66
 text = "MENU"
-metadata/_edit_use_anchors_ = true
+
+[node name="RetryLabel" type="Label" parent="." unique_id=1644770208]
+offset_left = 64.999985
+offset_top = 371.0
+offset_right = 302.0
+offset_bottom = 451.0
+rotation = 0.5586201
+theme_override_fonts/font = ExtResource("2_1n47p")
+theme_override_font_sizes/font_size = 66
+text = "RETRY"
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=1657381041]
-layout_mode = 0
-offset_left = 510.0
-offset_top = 261.0
-offset_right = 1117.0
-offset_bottom = 331.0
+offset_left = 454.0
+offset_top = 322.0
+offset_right = 1061.0
+offset_bottom = 392.0
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("2_1n47p")
 theme_override_font_sizes/font_size = 70
 text = "Score 0000000"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HighscoreLabel" type="Label" parent="." unique_id=2075499003]
-layout_mode = 0
-offset_left = 528.0
-offset_top = 360.0
-offset_right = 1269.0
-offset_bottom = 432.0
+offset_left = 503.0
+offset_top = 413.0
+offset_right = 1052.0
+offset_bottom = 485.0
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_1n47p")
@@ -113,52 +86,177 @@ theme_override_font_sizes/font_size = 68
 text = "Best 0000000"
 
 [node name="Title" type="Label" parent="." unique_id=42069252]
-layout_mode = 0
-offset_left = 424.0
-offset_top = 81.0
-offset_right = 1238.0
-offset_bottom = 245.0
+offset_left = 303.0
+offset_top = 116.0
+offset_right = 1222.0
+offset_bottom = 313.0
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_2mkai")
-theme_override_font_sizes/font_size = 142
+theme_override_font_sizes/font_size = 158
 text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GoG" type="Label" parent="." unique_id=128952910]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 479.0
-offset_top = 81.0
-offset_right = 562.0
-offset_bottom = 244.0
+offset_left = 331.0
+offset_top = 118.0
+offset_right = 431.0
+offset_bottom = 315.0
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_2mkai")
-theme_override_font_sizes/font_size = 142
+theme_override_font_sizes/font_size = 158
 text = "G"
 
 [node name="GoO" type="Label" parent="." unique_id=571838526]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 908.0
-offset_top = 81.0
-offset_right = 991.0
-offset_bottom = 244.0
+offset_left = 809.0
+offset_top = 115.0
+offset_right = 909.0
+offset_bottom = 312.0
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("3_2mkai")
-theme_override_font_sizes/font_size = 142
+theme_override_font_sizes/font_size = 158
 text = "O"
 
 [node name="Gop" type="Label" parent="." unique_id=775669560]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1187.0
-offset_top = 81.0
-offset_right = 1270.0
-offset_bottom = 244.0
+offset_left = 1176.0
+offset_top = 115.0
+offset_right = 1259.0
+offset_bottom = 312.0
 theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_2mkai")
-theme_override_font_sizes/font_size = 142
+theme_override_font_sizes/font_size = 158
 text = "!"
+
+[node name="ArrowsMenu" type="Node2D" parent="." unique_id=159357357]
+position = Vector2(50, -1)
+
+[node name="Arrow1" type="Sprite2D" parent="ArrowsMenu" unique_id=1232747935]
+position = Vector2(1300.0001, 284.99997)
+rotation = 2.50732
+scale = Vector2(0.028, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="Arrow2" type="Sprite2D" parent="ArrowsMenu" unique_id=1257732163]
+position = Vector2(1391.0001, 369.00003)
+rotation = 2.197119
+scale = Vector2(0.028, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="Arrow3" type="Sprite2D" parent="ArrowsMenu" unique_id=1765742806]
+position = Vector2(1512, 396)
+rotation = 1.5957533
+scale = Vector2(0.028, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="Walls" type="Node2D" parent="." unique_id=316784281]
+position = Vector2(0, -1)
+
+[node name="Caja3" parent="Walls" unique_id=649504575 instance=ExtResource("5_id3ag")]
+position = Vector2(-95.99988, 155)
+scale = Vector2(1.86, 1)
+
+[node name="WallTop" parent="Walls" unique_id=477895015 instance=ExtResource("5_id3ag")]
+position = Vector2(811.48, 30.905)
+scale = Vector2(16.85, 3.563)
+
+[node name="WallLeft" parent="Walls" unique_id=995992273 instance=ExtResource("5_id3ag")]
+position = Vector2(0, 23.965)
+rotation = 1.5707964
+scale = Vector2(2.975, 1.7)
+
+[node name="WallBottom" parent="Walls" unique_id=1469244768 instance=ExtResource("5_id3ag")]
+position = Vector2(805.65, 717)
+scale = Vector2(16.976, 1.382)
+
+[node name="WallRight" parent="Walls" unique_id=195421230 instance=ExtResource("5_id3ag")]
+position = Vector2(1618, -27)
+rotation = 1.5707964
+scale = Vector2(4.16, 1.7)
+
+[node name="WallRight2" parent="Walls" unique_id=1922148523 instance=ExtResource("5_id3ag")]
+position = Vector2(1618, 722.24)
+rotation = 1.5707964
+scale = Vector2(3.335, 1.7)
+
+[node name="Ayuda1" parent="Walls" unique_id=2119088554 instance=ExtResource("5_id3ag")]
+position = Vector2(1507.285, 640.36)
+rotation = -0.6544985
+scale = Vector2(2.525, 0.67)
+
+[node name="Ayuda 2" parent="Walls" unique_id=742341537 instance=ExtResource("5_id3ag")]
+position = Vector2(1543.785, 117.245)
+rotation = 0.715585
+scale = Vector2(1.66, 0.6)
+
+[node name="Caja1" parent="Walls" unique_id=78519199 instance=ExtResource("5_id3ag")]
+position = Vector2(1694.0001, 571)
+scale = Vector2(1.86, 1)
+
+[node name="Caja2" parent="Walls" unique_id=1953975927 instance=ExtResource("5_id3ag")]
+position = Vector2(1693.0001, 164)
+scale = Vector2(1.86, 1)
+
+[node name="DoorMenu" type="Area2D" parent="Walls" unique_id=1080153363]
+position = Vector2(1711, 369)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DoorMenu" unique_id=781610732]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_susww")
+
+[node name="WallRight3" parent="Walls" unique_id=1720203142 instance=ExtResource("5_id3ag")]
+position = Vector2(0, 719)
+rotation = 1.5707964
+scale = Vector2(3.335, 1.7)
+
+[node name="Ayuda 3" parent="Walls" unique_id=1636297120 instance=ExtResource("5_id3ag")]
+position = Vector2(96.11, 100)
+rotation = -0.65449846
+scale = Vector2(2.145, 0.6)
+
+[node name="Ayuda2" parent="Walls" unique_id=1227352119 instance=ExtResource("5_id3ag")]
+position = Vector2(111.46, 636.605)
+rotation = -2.4958208
+scale = Vector2(2.525, 0.67)
+
+[node name="DoorRetry" type="Area2D" parent="Walls" unique_id=334992368]
+position = Vector2(1711, 370)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/DoorRetry" unique_id=309798607]
+position = Vector2(-1797, -9)
+shape = SubResource("RectangleShape2D_susww")
+
+[node name="Caja4" parent="Walls" unique_id=2013870412 instance=ExtResource("5_id3ag")]
+position = Vector2(-99.99988, 562)
+scale = Vector2(1.86, 1)
+
+[node name="ArrowsRetry" type="Node2D" parent="." unique_id=1333500379]
+position = Vector2(50, -1)
+rotation = 0.48462564
+
+[node name="Arrow1" type="Sprite2D" parent="ArrowsRetry" unique_id=722506116]
+position = Vector2(426.93814, 268.04486)
+rotation = -1.2080162
+scale = Vector2(0.028, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="Arrow2" type="Sprite2D" parent="ArrowsRetry" unique_id=183491924]
+position = Vector2(299.13507, 252.8338)
+rotation = -1.4468033
+scale = Vector2(0.028000003, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="Arrow3" type="Sprite2D" parent="ArrowsRetry" unique_id=1060638981]
+position = Vector2(177.66983, 262.53928)
+rotation = 4.4623
+scale = Vector2(0.028, 0.035)
+texture = ExtResource("4_id3ag")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=987667187]
+environment = SubResource("Environment_1n47p")
