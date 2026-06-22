@@ -22,6 +22,7 @@ var start_origin: Vector2
 @onready var audio = $AudioStreamPlayer
 
 func _ready():
+	get_tree().paused = false
 	audio.play()  # ← dentro de _ready
 
 func _input(event):
