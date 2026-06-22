@@ -73,6 +73,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CollectibleSpawner" type="Node2D" parent="." unique_id=1361629499]
 
 [node name="Trail" type="Line2D" parent="." unique_id=1302597017]
+scale = Vector2(1.0372717, 1)
 width = 40.0
 width_curve = SubResource("Curve_68mvh")
 gradient = SubResource("Gradient_lyxkq")
@@ -80,7 +81,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Player" parent="." unique_id=1723820279 instance=ExtResource("1_d7u15")]
-position = Vector2(1046, 235)
+position = Vector2(92, 571)
 
 [node name="Walls" type="Node2D" parent="." unique_id=784425928]
 
@@ -111,4 +112,5 @@ autoplay = true
 
 [node name="MusicPowerup" type="AudioStreamPlayer" parent="." unique_id=1263281649]
 stream = ExtResource("10_dg7ii")
+volume_db = -5.032
 pitch_scale = 0.89

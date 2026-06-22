@@ -15,6 +15,11 @@ run/main_scene="uid://bxyjesnniwpow"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="uid://wanr7wy6tjow"
 
+[autoload]
+
+Transition="*uid://2rwckcfhkp8v"
+GameData="*uid://cbbcui8jmre2u"
+
 [display]
 
 window/size/viewport_width=1618
