@@ -8,21 +8,16 @@
 [ext_resource type="Shader" uid="uid://bufl1nahe10hv" path="res://shaders/main.gdshader" id="4_a8p2b"]
 [ext_resource type="PackedScene" uid="uid://drcf7gjhwa4td" path="res://escenas/EnemyChaser.tscn" id="4_o8odp"]
 [ext_resource type="PackedScene" uid="uid://csn65i20jukwr" path="res://escenas/power_up.tscn" id="5_68mvh"]
-
-[ext_resource type="AudioStream" uid="uid://og76pvedgefl" path="res://audio/gameplay_V2.mp3" id="9_dg7ii"]
-[ext_resource type="AudioStream" uid="uid://ci86oenslly1a" path="res://audio/gameplay_power_up2.mp3" id="10_dg7ii"]
-
 [ext_resource type="Texture2D" uid="uid://dbfe5ayxbmv4s" path="res://sprites/pausa sprite.png" id="7_7an46"]
 [ext_resource type="Script" uid="uid://nx2647s3i66t" path="res://scripts/pause_timer.gd" id="7_a5wrc"]
-[ext_resource type="Script" uid="uid://2sj7pgmmmj6q" path="res://scripts/pause_button.gd" id="8_acisx"]
+[ext_resource type="Script" uid="uid://bvr6pnw702y35" path="res://scripts/touch_screen_button.gd" id="8_s4hgp"]
 [ext_resource type="PackedScene" uid="uid://53wo3l6t8opa" path="res://escenas/pause_screen.tscn" id="9_a5wrc"]
+[ext_resource type="AudioStream" uid="uid://og76pvedgefl" path="res://audio/gameplay_V2.mp3" id="9_dg7ii"]
 [ext_resource type="FontFile" uid="uid://noqj64il7vwn" path="res://Beon-Regular.ttf" id="10_acisx"]
-[ext_resource type="Script" uid="uid://c3niiqthdtg62" path="res://scripts/resume_button.gd" id="11_a5wrc"]
-[ext_resource type="Script" uid="uid://deu3287wf18gx" path="res://scripts/menu_button.gd" id="12_s4hgp"]
+[ext_resource type="AudioStream" uid="uid://ci86oenslly1a" path="res://audio/gameplay_power_up2.mp3" id="10_dg7ii"]
 [ext_resource type="FontFile" uid="uid://epqs3lg2hw0m" path="res://Library 3 am.otf" id="13_jwie6"]
 [ext_resource type="Script" uid="uid://caokylplo6dwb" path="res://scripts/countdown_label.gd" id="14_s4hgp"]
 [ext_resource type="Script" uid="uid://b5c60da01ntjv" path="res://scripts/countdown_label_timer.gd" id="15_r01y2"]
-
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8p2b"]
 shader = ExtResource("4_a8p2b")
@@ -32,21 +27,21 @@ shader_parameter/radius = 0.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_68mvh"]
 light_mode = 1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ueiap"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rd5dn"]
+size = Vector2(64, 64)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwie6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r01y2"]
+size = Vector2(275, 75)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd5dn"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88j14"]
+size = Vector2(220, 75)
 
 [sub_resource type="Curve" id="Curve_68mvh"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -101,24 +96,14 @@ offset_top = 7.0
 offset_right = -2.764038
 offset_bottom = 2.0
 
-[node name="TextureButton" type="TextureButton" parent="DarkCanvasLayer/pause button" unique_id=471702177]
-process_mode = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.41300002
-anchor_top = 0.094000004
-anchor_right = 0.86
-anchor_bottom = 0.70500004
-offset_left = -0.059001923
-offset_top = -0.06600094
-offset_right = 0.019996643
-offset_bottom = 0.0049972534
+[node name="TouchScreenButton" type="TouchScreenButton" parent="DarkCanvasLayer/pause button" unique_id=348979484]
+position = Vector2(59.332, 9.605)
 texture_normal = ExtResource("7_7an46")
 texture_pressed = ExtResource("7_7an46")
-script = ExtResource("8_acisx")
+shape = SubResource("RectangleShape2D_rd5dn")
+script = ExtResource("8_s4hgp")
 
 [node name="pause screen" parent="DarkCanvasLayer" unique_id=351000288 instance=ExtResource("9_a5wrc")]
-visible = false
 
 [node name="resume layout" type="Control" parent="DarkCanvasLayer/pause screen" unique_id=1556225253]
 process_mode = 2
@@ -138,18 +123,17 @@ theme_override_fonts/font = ExtResource("10_acisx")
 theme_override_font_sizes/font_size = 68
 text = "RESUME"
 
-[node name="resume button" type="Button" parent="DarkCanvasLayer/pause screen/resume layout" unique_id=470360437]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 8.675
-anchor_top = 11.375001
-anchor_right = 16.075
-anchor_bottom = 13.775001
-offset_left = -8.0
-offset_top = -3.0517578e-05
-offset_right = 4.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_ueiap")
-script = ExtResource("11_a5wrc")
+[node name="resume touchscreen button" type="TouchScreenButton" parent="DarkCanvasLayer/pause screen/resume layout" unique_id=726806956]
+position = Vector2(493, 502.25)
+shape = SubResource("RectangleShape2D_r01y2")
+
+[node name="Panel" type="Panel" parent="DarkCanvasLayer/pause screen/resume layout" unique_id=1869075063]
+layout_mode = 0
+offset_left = 357.0
+offset_top = 461.0
+offset_right = 636.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rd5dn")
 
 [node name="menu layout" type="Control" parent="DarkCanvasLayer/pause screen" unique_id=1666053645]
 process_mode = 2
@@ -169,16 +153,17 @@ theme_override_fonts/font = ExtResource("10_acisx")
 theme_override_font_sizes/font_size = 68
 text = "MENU"
 
-[node name="menu button" type="Button" parent="DarkCanvasLayer/pause screen/menu layout" unique_id=999811535]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 25.7
-anchor_top = 11.375001
-anchor_right = 31.425001
-anchor_bottom = 13.775001
-offset_top = -3.0517578e-05
-theme_override_styles/normal = SubResource("StyleBoxFlat_jwie6")
-script = ExtResource("12_s4hgp")
+[node name="menu touchscreen button" type="TouchScreenButton" parent="DarkCanvasLayer/pause screen/menu layout" unique_id=1712826037]
+position = Vector2(1143, 502.25)
+shape = SubResource("RectangleShape2D_88j14")
+
+[node name="Panel" type="Panel" parent="DarkCanvasLayer/pause screen/menu layout" unique_id=1484632072]
+layout_mode = 0
+offset_left = 1029.0
+offset_top = 461.0
+offset_right = 1255.0
+offset_bottom = 540.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rd5dn")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=59612206]
 position = Vector2(806, 360)
@@ -251,27 +236,23 @@ scale = Vector2(7.455, 1.7)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926260528]
 environment = SubResource("Environment_dkga6")
 
-
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1675465884]
 stream = ExtResource("9_dg7ii")
 autoplay = true
 
 [node name="MusicPowerup" type="AudioStreamPlayer" parent="." unique_id=1263281649]
 stream = ExtResource("10_dg7ii")
-
-volume_db = -4.86
-
 volume_db = -5.032
-
 pitch_scale = 0.89
 
-[connection signal="button_down" from="DarkCanvasLayer/pause button/TextureButton" to="." method="_on_texture_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause button/TextureButton" to="DarkCanvasLayer/pause screen" method="_on_texture_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause screen/resume layout/resume button" to="DarkCanvasLayer/pause screen" method="_on_resume_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause screen/resume layout/resume button" to="countdown/pause timer" method="_on_resume_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause screen/resume layout/resume button" to="countdown/countdown label" method="_on_resume_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause screen/resume layout/resume button" to="countdown/countdown label/countdown label timer" method="_on_resume_button_button_down"]
-[connection signal="button_down" from="DarkCanvasLayer/pause screen/menu layout/menu button" to="." method="_on_menu_button_button_down"]
+[connection signal="pressed" from="DarkCanvasLayer/pause button/TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause button/TouchScreenButton" to="DarkCanvasLayer/pause screen" method="_on_touch_screen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause button/TouchScreenButton" to="DarkCanvasLayer/pause button/TouchScreenButton" method="_on_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause screen/resume layout/resume touchscreen button" to="DarkCanvasLayer/pause screen" method="_on_resume_touchscreen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause screen/resume layout/resume touchscreen button" to="countdown/pause timer" method="_on_resume_touchscreen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause screen/resume layout/resume touchscreen button" to="countdown/countdown label" method="_on_resume_touchscreen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause screen/resume layout/resume touchscreen button" to="countdown/countdown label/countdown label timer" method="_on_resume_touchscreen_button_pressed"]
+[connection signal="pressed" from="DarkCanvasLayer/pause screen/menu layout/menu touchscreen button" to="." method="_on_menu_touchscreen_button_pressed"]
 [connection signal="timeout" from="countdown/pause timer" to="." method="_on_pause_timer_timeout"]
+[connection signal="timeout" from="countdown/pause timer" to="DarkCanvasLayer/pause button/TouchScreenButton" method="_on_pause_timer_timeout"]
 [connection signal="timeout" from="countdown/countdown label/countdown label timer" to="countdown/countdown label" method="_on_countdown_label_timer_timeout"]
-

@@ -13,7 +13,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_resume_button_button_down() -> void:
+func _on_resume_touchscreen_button_pressed() -> void:
 	time_left = 3
 	set_text(str(time_left))
 	set_visible(true)

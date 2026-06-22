@@ -25,13 +25,6 @@ func _ready():
 	get_tree().paused = false
 	audio.play()  # ← dentro de _ready
 
-func _input(event):
-	if event is InputEventScreenTouch and event.pressed:
-		audio.stop()  # ← frenar antes de cambiar de escena
-		get_tree().change_scene_to_file("res://escenas/main.tscn")
-
-
-
 	Transition.fade_in()
 	door_start.body_entered.connect(_on_door_start_entered)
 	player.dim_duration = 99999999999999.0

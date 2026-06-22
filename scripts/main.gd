@@ -319,11 +319,13 @@ func expand_invert_wave():
 		material.set_shader_parameter("radius", r)
 	, 0.0, 3, 1.2)
 
-func _on_texture_button_button_down() -> void:
-	get_tree().paused = true
-
 func _on_pause_timer_timeout() -> void:
 	get_tree().paused = false
 
-func _on_menu_button_button_down() -> void:
+
+func _on_touch_screen_button_pressed() -> void:
+	get_tree().paused = true
+
+
+func _on_menu_touchscreen_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://escenas/main_menu.tscn")

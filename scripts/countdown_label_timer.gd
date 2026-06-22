@@ -11,5 +11,5 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_resume_button_button_down() -> void:
+func _on_resume_touchscreen_button_pressed() -> void:
 	start()

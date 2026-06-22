@@ -11,8 +11,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_texture_button_button_down() -> void:
-	set_visible(true)
-
-func _on_resume_button_button_down() -> void:
+func _on_resume_touchscreen_button_pressed() -> void:
 	set_visible(false)
+
+func _on_touch_screen_button_pressed() -> void:
+	set_visible(true)

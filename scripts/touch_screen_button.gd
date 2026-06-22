@@ -1,4 +1,4 @@
-extends Timer
+extends TouchScreenButton
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,5 +10,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_resume_touchscreen_button_pressed() -> void:
-	start()
+
+func _on_pressed() -> void:
+	set_visible(false)
+
+
+func _on_pause_timer_timeout() -> void:
+	set_visible(true)
