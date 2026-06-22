@@ -143,7 +143,7 @@ func lose_life():
 	death_sequence()
 	audio.stop()       # ← agregado
 func death_sequence():
-
+	Input.vibrate_handheld(500)
 	get_tree().paused = false
 	set_process(true)
 	set_physics_process(false)

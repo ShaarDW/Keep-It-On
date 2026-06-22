@@ -146,10 +146,6 @@ shape = SubResource("RectangleShape2D_w6fns")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1934268662]
 environment = SubResource("Environment_vhgtv")
 
-[node name="Asds" type="Sprite2D" parent="." unique_id=284995937]
-position = Vector2(1042, 218)
-scale = Vector2(0.085, 0.085)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1664731191]
 stream = ExtResource("5_3r3h5")
 pitch_scale = 1.19

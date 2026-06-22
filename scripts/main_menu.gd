@@ -12,7 +12,6 @@ var arrow_timer := 0.0
 var arrow_interval := 0.30
 var current_arrow := 0
 @onready var start_label = $StartLayer1
-@onready var start2 = $StartLayer2
 var start_origin1: Vector2
 var start_origin2: Vector2
 var start_blink_timer := 0.0

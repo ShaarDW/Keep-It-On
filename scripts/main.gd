@@ -11,7 +11,8 @@ extends Node2D
 @onready var dark_overlay = $DarkOverlay
 @onready var music = $Music
 @onready var music_powerup = $MusicPowerup
-
+var pause_sprite_white: Sprite2D
+var pause_sprite_black: Sprite2D
 
 var label_score_powerup: Label
 
@@ -57,6 +58,7 @@ func _ready():
 	add_to_group("main")
 	await get_tree().process_frame
 	player.died.connect(_on_player_died)
+	setup_pause_button()
 	setup_score_label()
 	start_wave(0)
 	enemy_types_pool = [
@@ -92,6 +94,30 @@ func start_wave(wave_index: int):
 	if wave_enemies.size() > 0:
 		enemy_spawn_interval = duration / float(wave_enemies.size())
 	next_enemy_spawn = 0.0 if wave_index > 0 else 9999.0
+
+func setup_pause_button():
+	var pause_texture = load("res://sprites/pausa sprite.png")
+	
+	# Sprite blanco siempre visible
+	pause_sprite_white = Sprite2D.new()
+	add_child(pause_sprite_white)
+	pause_sprite_white.texture = pause_texture
+	pause_sprite_white.z_index = 99
+	pause_sprite_white.position = Vector2(1560, 35)
+	var mat_white = CanvasItemMaterial.new()
+	mat_white.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+	pause_sprite_white.material = mat_white
+	
+	# Sprite negro solo con luz
+	pause_sprite_black = Sprite2D.new()
+	add_child(pause_sprite_black)
+	pause_sprite_black.texture = pause_texture
+	pause_sprite_black.z_index = 100
+	pause_sprite_black.position = Vector2(1560, 35)
+	var mat_black = CanvasItemMaterial.new()
+	mat_black.light_mode = CanvasItemMaterial.LIGHT_MODE_LIGHT_ONLY
+	pause_sprite_black.modulate = Color(0, 0, 0, 1)
+	pause_sprite_black.material = mat_black
 
 func setup_score_label():
 	# Label negro que solo aparece con luz (encima)
